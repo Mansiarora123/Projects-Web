@@ -1,0 +1,130 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  background: #f8fafe;
+  color: #232531;
+  margin: 0;
+  padding: 0 1rem 2rem;
+}
+
+main {
+  width: 1090px;
+  height: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+h1 {
+  color: #226785;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(33, 99, 165, 0.12);
+}
+
+caption {
+  caption-side: top;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: #315f86;
+  text-align: left;
+  padding-left: 8px;
+}
+
+thead tr {
+  background-color: #e6f0fa;
+}
+
+th, td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #dde7f1;
+}
+
+th {
+  font-weight: 700;
+  color: #226785;
+}
+
+/* Alternate row shading */
+tbody tr:nth-child(even) {
+  background-color: #f7fbff;
+}
+
+/* Buttons */
+button {
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: #226785;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled),
+button:focus:not(:disabled) {
+  background-color: #104a66;
+  outline: none;
+}
+
+/* Disabled (sold out) buttons */
+button[disabled],
+button[aria-disabled="true"] {
+  background-color: #b2bfc6;
+  cursor: not-allowed;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    display: none;
+  }
+
+  tbody tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid #dde7f1;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  tbody tr td {
+    padding-left: 50%;
+    position: relative;
+    text-align: left;
+  }
+
+  tbody tr td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: #226785;
+    white-space: nowrap;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+}

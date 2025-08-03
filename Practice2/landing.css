@@ -1,0 +1,182 @@
+/* Reset and base */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1d2434;
+  background: #f5f8fa;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header styling */
+header {
+  background: linear-gradient(135deg, #28345e 0%, #1e2747 100%);
+  color: #fff;
+  padding: 3em 1em 2em;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(40, 52, 94, 0.4);
+}
+
+header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.25em;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+
+header p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  max-width: 450px;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+/* Product section */
+.product {
+  background: #fff;
+  max-width: 620px;
+  height: 450px;
+  margin: 2.5em auto;
+  padding: 2.5em 2em;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(40, 52, 94, 0.12);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(40, 52, 94, 0.18);
+}
+
+.product img {
+  max-width: 180px;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(40, 52, 94, 0.1);
+  margin-bottom: 1.5em;
+}
+
+.product p {
+  font-size: 1.1rem;
+  color: #343a52;
+  margin-bottom: 1.8em;
+  line-height: 1.4;
+}
+
+/* Buttons styling */
+button {
+  background-color: #28345e;
+  color: #fff;
+  border: none;
+  padding: 0.9em 2.5em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 5px 15px rgba(40, 52, 94, 0.25);
+}
+
+button:hover,
+button:focus {
+  background-color: #1f2b50;
+  box-shadow: 0 8px 20px rgba(31, 43, 80, 0.4);
+  outline: none;
+}
+
+/* Signup section */
+.signup {
+  background: #fff;
+  max-width: 620px;
+  margin: 3em auto 4em;
+  padding: 2.5em 2em;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(40, 52, 94, 0.12);
+  font-size: 1rem;
+  color: #1d2434;
+}
+
+.signup h2 {
+ 
+  margin-bottom: 1.4em;
+  font-weight: 700;
+  color: #28345e;
+  text-align: center;
+  letter-spacing: 0.05em;
+  font-size: 1.8rem;
+}
+
+.signup label {
+  display: block;
+  margin-bottom: 0.7em;
+  font-weight: 600;
+  color: #4a5063;
+  cursor: pointer;
+}
+
+.signup input[type="email"],
+.signup input[type="checkbox"] {
+  outline: none;
+}
+
+.signup input[type="email"] {
+  width: 100%;
+  padding: 0.65em 1em;
+  margin-top: 0.3em;
+  margin-bottom: 1.4em;
+  font-size: 1rem;
+  border: 1.8px solid #bbb;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.signup input[type="email"]:focus {
+  border-color: #28345e;
+  box-shadow: 0 0 8px rgba(40, 52, 94, 0.3);
+}
+
+.signup input[type="checkbox"] {
+  margin-right: 0.75em;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  header {
+    padding: 2.5em 1em 1.5em;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+    max-width: 320px;
+  }
+
+  .product,
+  .signup {
+    margin-left: 1em;
+    margin-right: 1em;
+    max-width: 100%;
+    padding: 2em 1.5em;
+  }
+
+  button {
+    width: 100%;
+    padding: 1em 0;
+  }
+}
+footer{
+ background: linear-gradient(135deg, #28345e 0%, #1e2747 100%);
+  color: #fff;
+  font-size: large;
+  padding: 1em 1em 1em;
+  text-align: center;
+  height: 44px;
+}

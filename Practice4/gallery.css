@@ -1,0 +1,77 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #eaecf0;
+  color: #162a3e;
+  line-height: 1.5;
+  
+}
+
+main {
+  max-width: 1060px;
+  margin: 2em auto;
+  padding: 0 1em;
+}
+
+h1 {
+  text-align: center;
+  color: #2a4d69;
+  margin-bottom: 1.5em;
+}
+
+/* Gallery container */
+.gallery {
+  background-color: rgba(251, 247, 231, 0.786);
+  font-size: 0; /* removes inline-block whitespace */
+  text-align: center;
+}
+
+/* Each image */
+.gallery img {
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+  margin: 0.5em;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+  vertical-align: top;
+}
+
+/* Hover effect */
+.gallery img:hover,
+.gallery img:focus {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  outline: none;
+}
+
+/* Responsive layout */
+
+/* Small screens: 1 column */
+@media (max-width: 600px) {
+  .gallery img {
+    max-width: 90%;
+    margin: 0.75em auto;
+    display: block;
+  }
+}
+
+/* Medium screens: 2 columns */
+@media (min-width: 601px) and (max-width: 900px) {
+  .gallery img {
+    width: 48%;
+    margin: 1%;
+  }
+}
+
+/* Large screens: 3 columns */
+@media (min-width: 901px) {
+  .gallery img {
+    width: 31%;
+    margin: 1%;
+  }
+}

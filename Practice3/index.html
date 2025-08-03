@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Understanding CSS: The Basics</title>
+  <link rel="stylesheet" href="blogpost.css" />
+</head>
+<body>
+  <main>
+    <article>
+      <header>
+        <h1>Understanding CSS: The Basics</h1>
+        <p>
+          By <span class="author">Mansi Arora</span> |
+          Published: <time datetime="2025-06-01">June 1, 2025</time>
+        </p>
+      </header>
+
+      <figure>
+        <img src="./Screenshot 2025-08-03 212933.png" alt="CSS styling example" />
+        <figcaption>Example of CSS styling applied to a webpage.</figcaption>
+      </figure>
+
+      <section class="post-content">
+        <h2>Introduction to CSS</h2>
+        <p>
+          Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a
+          document written in HTML. CSS controls the layout of multiple web pages all at once.
+        </p>
+
+        <h2>Why Use CSS?</h2>
+        <p>Some key benefits of CSS include:</p>
+        <ul>
+          <li>Separation of content and design</li>
+          <li>Improved website maintenance and consistency</li>
+          <li>Flexible layouts and responsive design</li>
+        </ul>
+
+        <h2>Basic CSS Syntax</h2>
+        <p>CSS syntax consists of selectors and declarations:</p>
+        <ol>
+          <li><strong>Selector:</strong> The HTML element you want to style</li>
+          <li><strong>Declaration:</strong> The property and value to apply</li>
+        </ol>
+
+        <p>Example:</p>
+        <pre><code>h1 {
+  color: blue;
+  font-size: 2em;
+}</code></pre>
+
+        <p>
+          CSS can be included inline, internally within a style tag, or externally via CSS files.
+          External CSS is the preferred method for scalability.
+        </p>
+      </section>
+
+      <section class="comments" aria-label="Comments">
+        <h2>Comments</h2>
+
+        <article class="comment">
+          <header>
+            <p><strong>Sara K.</strong> <time datetime="2025-06-05">June 5, 2025</time></p>
+          </header>
+          <p>This post was really helpful and well explained. CSS is now less intimidating!</p>
+        </article>
+
+        <article class="comment">
+          <header>
+            <p><strong>Michael R.</strong> <time datetime="2025-06-06">June 6, 2025</time></p>
+          </header>
+          <p>I like how the example syntax is shown clearly. Thanks for this beginner-friendly guide.</p>
+        </article>
+
+      </section>
+    </article>
+  </main>
+</body>
+</html>

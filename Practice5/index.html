@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sticky Navigation Bar Example</title>
+  <style>
+    /* Global styles */
+    body {
+       color: #181717;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #d6d3d3;
+      scroll-behavior: smooth; /* Enables smooth scrolling */
+    }
+
+    /* Sticky Navbar styles */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #524b4b;
+      padding: 1em ;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      height: 40px;
+      text-align: center;
+    }
+
+    nav ul {
+      margin:0;
+      padding: 1rem;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+    }
+
+    nav a {
+      color: #f2f2f2;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      padding: 0.3em 0.5em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #575757;
+      color: white;
+      outline: none;
+    }
+
+    /* Section styles */
+    section {
+      max-width: 800px;
+      margin: 3em auto;
+      padding: 1em 2em;
+      border-bottom: 1px solid #ddd;
+      color: black;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 0.5em;
+      border-bottom: 2px solid #333;
+      padding-bottom: 0.3em;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.1em;
+      margin-bottom: 1.25em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <nav>
+    <ul>
+      <li><a href="#section1">Introduction</a></li>
+      <li><a href="#section2">Features</a></li>
+      <li><a href="#section3">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Content sections -->
+  <main>
+    <section id="section1">
+      <h2>Introduction</h2>
+      <p>Welcome to this example page demonstrating a sticky navigation bar. Scroll down to see the navbar stay fixed at the top while you browse content.</p>
+      <p>The sticky property allows the navigation bar to toggle between relative and fixed positioning based on the scroll position.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula, elit at vehicula facilisis, lorem metus bibendum augue, sed malesuada mauris odio non nisl. Proin elementum aliquet magna, eu varius nulla semper vitae.</p>
+      <p>Suspendisse tempus libero at lacus pellentesque, non condimentum lorem fringilla. Vestibulum at elit vel ipsum commodo tincidunt. Cras fermentum a urna a efficitur.</p>
+      <p>Donec tristique, quam non tincidunt fermentum, augue risus efficitur massa, a tempor magna erat vel lacus. Vestibulum eu dui vitae dui posuere facilisis.</p>
+      <p>Aenean finibus porttitor tortor id feugiat. Pellentesque ut nisl at nisi scelerisque eleifend quis a odio. Integer vulputate neque at lectus sollicitudin, ut condimentum tellus luctus.</p>
+    </section>
+
+    <section id="section2">
+      <h2>Features</h2>
+      <p>This simple page includes:</p>
+      <ul>
+        <li>Sticky navigation bar using pure CSS</li>
+        <li>Smooth scroll to sections via anchor links</li>
+        <li>Responsive, centered navigation links</li>
+        <li>Basic styling for readability</li>
+      </ul>
+      <p>Scroll further to reach the Contact section.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus ex at tellus suscipit, ut ultrices nibh porta. Proin ut leo placerat, convallis justo sit amet, gravida leo.</p>
+      <p>Curabitur suscipit luctus sapien, nec pretium nibh pulvinar a. Vestibulum facilisis est et quam convallis, nec faucibus nulla blandit.</p>
+      <p>Nullam cursus risus a diam dignissim, nec dapibus urna facilisis. Vivamus condimentum, erat at bibendum maximus, quam ipsum porttitor justo, sed congue orci ante et lectus.</p>
+      <p>Praesent eros turpis, venenatis vitae tincidunt nec, cursus id leo. Integer dignissim, orci ut vehicula dignissim, tellus lorem porta urna, non cursus diam libero eget ex.</p>
+    </section>
+
+    <section id="section3">
+      <h2>Contact</h2>
+      <p>Feel free to get in touch by sending an email to <a href="mailto:example@example.com">example@example.com</a> or visiting our social media pages.</p>
+      <p>This demo showcases foundational frontend skills without JavaScript.</p>
+      <p>Aliquam erat volutpat. Mauris eu mauris sed diam porttitor lobortis. In non faucibus metus, id condimentum sapien.</p>
+      <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas quis sollicitudin dolor, cursus cursus nibh.</p>
+      <p>Fusce eget lorem id velit dignissim cursus a at risus. Integer tortor elit, luctus non magna vitae, egestas pretium augue.</p>
+      <p>Donec posuere dictum aliquet. Nam pulvinar nisl leo, a viverra ipsum efficitur a. Integer in mi vel diam efficitur dictum sit amet quis tellus.</p>
+    </section>
+  </main>
+
+</body>
+</html>

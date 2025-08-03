@@ -1,0 +1,45 @@
+body {
+  font-family: Verdana, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 2rem;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #435392;
+  margin-bottom: 2rem;
+}
+
+.faq-list {
+  list-style: none;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.faq-list li {
+  background: #fff;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px #dde5f3;
+}
+
+.question {
+  display: block;
+  font-weight: bold;
+  color: #1b3777;
+  cursor: default;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.answer {
+  display: block;
+  color: #555;
+  margin-left: 1rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
