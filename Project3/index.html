@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ToDo List App</title>
+  <style>
+    /* Base styles */
+    body {
+      background: #f2f6fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #233;
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    main.todo-app {
+      max-width: 650px;
+      height: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 5px 24px rgba(189, 208, 247, 0.6);
+    }
+
+    main.todo-app h1 {
+      text-align: center;
+      color: #2962ff;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    form#todo-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    form#todo-form label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    input#todo-input {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #dde2f9;
+      border-radius: 8px 0 0 8px;
+      transition: border-color 0.2s ease;
+    }
+
+    input#todo-input:focus {
+      outline: none;
+      border-color: #2962ff;
+      box-shadow: 0 0 7px rgba(41,98,255,0.4);
+    }
+
+    button#add-btn {
+      background: #2962ff;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 0 1.2rem;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button#add-btn:hover,
+    button#add-btn:focus {
+      background: #203880;
+      outline: none;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .filter-buttons button {
+      background: #e2ecfc;
+      border: none;
+      color: #2962ff;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .filter-buttons button.active,
+    .filter-buttons button:hover,
+    .filter-buttons button:focus {
+      background: #2962ff;
+      color: white;
+      outline: none;
+    }
+
+    ul#todo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li.todo-item {
+      display: flex;
+      align-items: center;
+      background: #f7faff;
+      box-shadow: 0 2px 5px rgba(226, 234, 252, 0.9);
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 0.7rem;
+      transition: background-color 0.2s ease;
+    }
+
+    li.todo-item.completed {
+      color: #aaa;
+      text-decoration: line-through;
+      opacity: 0.6;
+      background: #ececec;
+    }
+
+    input[type="checkbox"].todo-checkbox {
+      width: 22px;
+      height: 22px;
+      margin-right: 1rem;
+      cursor: pointer;
+      accent-color: #2962ff;
+      flex-shrink: 0;
+    }
+
+    span.todo-text {
+      flex-grow: 1;
+      word-break: break-word;
+      font-size: 1.05rem;
+    }
+
+    button.delete-btn {
+      margin-left: 1rem;
+      background: none;
+      border: none;
+      color: #c62828;
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    button.delete-btn:hover,
+    button.delete-btn:focus {
+      color: #8b0000;
+      outline: none;
+    }
+
+    @media (max-width: 500px) {
+      main.todo-app {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="todo-app" aria-label="ToDo List Application">
+    <h1>ToDo List</h1>
+
+    <form id="todo-form" aria-label="Add new task form">
+      <label for="todo-input">New Task</label>
+      <input
+        type="text"
+        id="todo-input"
+        placeholder="Add a new task..."
+        autocomplete="off"
+        required
+        aria-required="true"
+        aria-describedby="taskHelp"
+      />
+      <button id="add-btn" type="submit" aria-label="Add task">+</button>
+    </form>
+    <div id="taskHelp" class="sr-only">Enter task and press plus button to add</div>
+
+    <div class="filter-buttons" role="group" aria-label="Filter tasks">
+      <button type="button" data-filter="all" class="active" aria-pressed="true">All</button>
+      <button type="button" data-filter="active" aria-pressed="false">Active</button>
+      <button type="button" data-filter="completed" aria-pressed="false">Completed</button>
+    </div>
+
+    <ul id="todo-list" aria-live="polite" aria-relevant="additions removals"></ul>
+  </main>
+
+<script>
+  // Cached DOM elements
+  const listEl = document.getElementById('todo-list');
+  const formEl = document.getElementById('todo-form');
+  const inputEl = document.getElementById('todo-input');
+  const filterBtns = document.querySelectorAll('.filter-buttons button');
+
+  // Load todos from localStorage or initialize empty list
+  let todos = JSON.parse(localStorage.getItem('todos')) || [];
+  let currentFilter = "all";
+
+  // Render todo list based on current filter
+  function renderTodos() {
+    // Clear existing list
+    listEl.innerHTML = "";
+
+    // Filter todos according to selection
+    const filteredTodos = todos.filter(todo => {
+      if (currentFilter === "all") return true;
+      if (currentFilter === "active") return !todo.completed;
+      if (currentFilter === "completed") return todo.completed;
+    });
+
+    // Build list items
+    filteredTodos.forEach((todo, index) => {
+      const li = document.createElement('li');
+      li.className = "todo-item" + (todo.completed ? " completed" : "");
+      li.setAttribute('role', 'listitem');
+
+      li.innerHTML = `
+        <input
+          type="checkbox"
+          class="todo-checkbox"
+          id="todo-${index}"
+          ${todo.completed ? "checked" : ""}
+          aria-checked="${todo.completed}"
+          aria-labelledby="label-todo-${index}" />
+        <span class="todo-text" id="label-todo-${index}">${escapeHtml(todo.text)}</span>
+        <button class="delete-btn" aria-label="Delete task ${escapeHtml(todo.text)}" title="Delete task">&times;</button>
+      `;
+
+      // Event listeners for checkbox and delete button
+      li.querySelector('.todo-checkbox').addEventListener('change', () => toggleComplete(index));
+      li.querySelector('.delete-btn').addEventListener('click', () => deleteTodo(index));
+
+      listEl.appendChild(li);
+    });
+
+    // Persist data
+    saveTodos();
+  }
+
+  // Escape HTML in user input to prevent XSS issues
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Add a new todo
+  function addTodo(event) {
+    event.preventDefault();
+    const task = inputEl.value.trim();
+    if (task === "") return;
+    todos.unshift({ text: task, completed: false });
+    inputEl.value = "";
+    renderTodos();
+  }
+
+  // Toggle completion status
+  function toggleComplete(index) {
+    todos[index].completed = !todos[index].completed;
+    renderTodos();
+  }
+
+  // Delete todo item
+  function deleteTodo(index) {
+    todos.splice(index, 1);
+    renderTodos();
+  }
+
+  // Save todos to localStorage
+  function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  // Filter button click handler
+  filterBtns.forEach(button => {
+    button.addEventListener('click', () => {
+      filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
+      currentFilter = button.getAttribute('data-filter');
+      renderTodos();
+    });
+  });
+
+  // Initialize: render list and attach form submit
+  renderTodos();
+  formEl.addEventListener('submit', addTodo);
+</script>
+</body>
+</html>

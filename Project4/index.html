@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KBC Quiz App</title>
+  <style>
+    body {
+      background: radial-gradient(circle, #2b3a71 60%, #10152d 100%);
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    main.kbc-app {
+      max-width: 640px;
+      margin: 2rem auto;
+      background: rgba(20,32,68,0.93);
+      border-radius: 18px;
+      box-shadow: 0 8px 44px #282861c8;
+      padding: 2.6rem 2rem 2.2rem;
+      position: relative;
+    }
+    .kbc-ladder {
+      position: absolute;
+      left: -100px;
+      top: 1.5em;
+      background: rgba(25,40,82,0.92);
+      border-radius:12px;
+      color:#fff;
+      width:90px;
+      padding:1.2em 0.8em;
+      font-size: 1em;
+      text-align: right;
+      box-shadow:0 2px 16px #25255a66;
+      display:flex;
+      flex-direction:column-reverse;
+      z-index:0;
+    }
+    .kbc-ladder span {
+      display:block;
+      margin-bottom:0.44em;
+      padding:0.26em 0.6em;
+      border-radius:7px;
+      font-weight:600;
+      background:transparent;
+      color:inherit;
+      transition: background 0.23s, color 0.23s;
+    }
+    .kbc-ladder .active {
+      background:gold;
+      color:#4a4da1;
+      font-weight:800;
+      box-shadow: 0 0 20px #ffe06688;
+      letter-spacing:0.5px;
+    }
+    h1.kbc-title {
+      text-align: center;
+      font-size: 2.3rem;
+      margin-bottom: 0.8em;
+      font-family: 'Trebuchet MS', Arial, sans-serif;
+      color: gold;
+      letter-spacing: 1.6px;
+      text-shadow: 0 2px 12px #ffe06644;
+    }
+    .kbc-logo {
+      display:block;
+      margin:0 auto 1.5em;
+      max-width:100px;
+      opacity:0.82;
+      border-radius: 50%;
+    }
+    .kbc-question-block {
+      background: #2a429e;
+      border: 2.5px solid gold;
+      border-radius: 12px;
+      padding: 2em 1.4em 1.3em;
+      margin-bottom: 1.7em;
+      box-shadow:0 0px 22px #ffe06618;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 500;
+      min-height: 4.2em;
+      letter-spacing:0.1px;
+    }
+    .kbc-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3em;
+      margin-bottom: 2.1em;
+    }
+    .kbc-option {
+      display:flex;
+      align-items:center;
+      background: #182157;
+      border: 2px solid #5962a0;
+      border-radius: 8px;
+      padding: 0.85em 1.2em;
+      cursor: pointer;
+      font-size: 1.12em;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      transition: background 0.18s, border 0.18s, color 0.15s;
+      box-shadow: 0 2px 16px #25255a22;
+      position:relative;
+      outline: none;
+      min-width:0;
+    }
+    .kbc-option:hover:not(.locked), .kbc-option:focus:not(.locked) {
+      border-color: gold;
+      background: #242e76;
+      color: gold;
+    }
+    .kbc-option.locked {
+      pointer-events:none;
+      opacity:0.71;
+    }
+    .kbc-opt-label {
+      width:2.15em;
+      height:2.15em;
+      background: gold;
+      border-radius:50%;
+      color: #272848;
+      display:flex;
+      align-items: center;
+      justify-content:center;
+      font-weight:900;
+      font-size:1.18em;
+      margin-right:1.1em;
+      box-shadow:0 2px 8px #ffe06677;
+    }
+    .kbc-option.correct {
+      background: #36e45e;
+      color: #13192e;
+      border-color: #20ab3c;
+      transition: background 0.34s, color 0.3s;
+    }
+    .kbc-option.incorrect {
+      background: #e44c36;
+      color: #fff;
+      border-color: #a32020;
+      transition: background 0.34s, color 0.3s;
+    }
+    .kbc-hintbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items:center;
+      margin-bottom: 1.3em;
+      gap:1em;
+    }
+    .kbc-lifeline {
+      background: #32418d;
+      color: gold;
+      border: 2px solid gold;
+      border-radius: 7px;
+      margin-right: 0.3em;
+      font-weight: 700;
+      padding: 0.4em 0.8em;
+      font-size: 1em;
+      cursor: pointer;
+      opacity:0.94;
+      transition: background 0.19s;
+    }
+    .kbc-lifeline:disabled { opacity:0.48; cursor:not-allowed; }
+    #kbc-hint { font-weight:500; color:#ffe45c;margin-left:1.1em;letter-spacing:0.06em;font-size:1.03em; }
+    .kbc-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1.4em;
+      margin-top: 1rem;
+    }
+    .kbc-controls button {
+      background: gold;
+      font-weight: bold;
+      color: #1a2240;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      padding: 0.55em 1.5em;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s;
+      letter-spacing:0.3px;
+      box-shadow:0 2px 10px #ffe06633;
+    }
+    .kbc-controls button:disabled { opacity:0.62; cursor: not-allowed; }
+    .kbc-controls button:hover, .kbc-controls button:focus { background: #ffe066; color: #222; }
+    .kbc-score-msg {
+      text-align: center;
+      margin-top: 2.3em;
+      color: gold;
+      font-size: 1.18em;
+      min-height:2.5em;
+      letter-spacing:0.2px;
+    }
+    @media(max-width: 820px){
+      .kbc-ladder { position:relative; left:auto; top:auto; width:auto; margin:1em auto 2em; flex-direction:row; justify-content:space-around;font-size:0.93em;}
+      .kbc-ladder span {margin:0 0.5em 0 0;}
+      main.kbc-app{padding-left:1.2em;}
+    }
+    @media(max-width:520px) {
+      main.kbc-app{padding:1em 0.2em;}
+      h1.kbc-title{font-size:1.3em;}
+      .kbc-ladder{flex-direction:column;align-items:center;}
+    }
+  </style>
+</head>
+<body>
+  <main class="kbc-app" aria-label="KBC Quiz App">
+    <img src="./kbc.jpg" alt="KBC Logo" class="kbc-logo" />
+    <h1 class="kbc-title">Kaun Banega Crorepati Quiz</h1>
+    <nav class="kbc-ladder" aria-label="Money Ladder" id="kbc-ladder">
+      <!-- Ladder will be filled by JS -->
+    </nav>
+    <div class="kbc-hintbar">
+      <button type="button" class="kbc-lifeline" title="50-50 (disabled demo)" disabled>50-50</button>
+      <button type="button" class="kbc-lifeline" title="Audience (disabled demo)" disabled>Audience</button>
+      <span id="kbc-hint"></span>
+    </div>
+    <section>
+      <div class="kbc-question-block" id="kbc-question"></div>
+      <div class="kbc-options" id="kbc-options"></div>
+      <div class="kbc-controls">
+        <button id="kbc-next" type="button" disabled>Next</button>
+        <button id="kbc-hint-btn" type="button">Hint</button>
+      </div>
+      <div class="kbc-score-msg" id="kbc-score-msg"></div>
+    </section>
+  </main>
+  <script>
+    // ------ Quiz Data & Ladder ------
+    const questions = [
+      { q: "Who is known as the father of computers?", opts: ["Alan Turing", "Charles Babbage", "Steve Jobs", "Tim Berners-Lee"], a:1, hint:"Invented the Analytical Engine." },
+      { q: "Which planet is known as the Red Planet?", opts: ["Jupiter","Saturn","Venus","Mars"], a:3, hint:"Fourth planet from the sun." },
+      { q: "What is the capital of France?", opts: ["London","Berlin","Paris","Madrid"], a:2, hint:"Eiffel Tower city." },
+      { q: "What is the largest ocean?", opts: ["Atlantic","Indian","Pacific","Arctic"], a:2, hint:"'Rim of fire' surrounds it." },
+      { q: "Which element has the chemical symbol O?",opts:["Gold","Oxygen","Silver","Iron"], a:1, hint:"We breathe it in." }
+    ];
+    // KBC ladder (top-to-bottom amounts for 5 Qs)
+    const ladder = ["₹ 1,00,000","₹ 40,000","₹ 10,000","₹ 5,000","₹ 2,000"];
+
+    // ------ State ------
+    let idx=0, score=0, optionLocked=false, usedHint=false;
+    const ladderEl = document.getElementById("kbc-ladder");
+    const qBlock = document.getElementById("kbc-question");
+    const optsBlock = document.getElementById("kbc-options");
+    const nextBtn = document.getElementById("kbc-next");
+    const hintBtn = document.getElementById("kbc-hint-btn");
+    const hintMsg = document.getElementById("kbc-hint");
+    const scoreMsg = document.getElementById("kbc-score-msg");
+    // Inject Money Ladder
+    function renderLadder() {
+      ladderEl.innerHTML = "";
+      for(let i=ladder.length-1;i>=0;i--){
+        const sp = document.createElement('span');
+        sp.textContent = ladder[i];
+        if(i === idx) sp.className = "active";
+        ladderEl.appendChild(sp);
+      }
+    }
+    // Render Q&A
+    function render() {
+      renderLadder();
+      const q = questions[idx];
+      qBlock.textContent = q.q;
+      optsBlock.innerHTML = "";
+      optionLocked = false;
+      usedHint = false;
+      hintMsg.textContent = '';
+      hintBtn.disabled = false;
+      // Labels A/B/C/D
+      const abc = ["A","B","C","D"];
+      q.opts.forEach((opt,i)=>{
+        const op = document.createElement('button');
+        op.type="button";
+        op.className="kbc-option";
+        op.innerHTML=`<span class="kbc-opt-label">${abc[i]}</span> <span>${opt}</span>`;
+        op.onclick=()=>chooseOption(op,i);
+        op.tabIndex = 0;
+        optsBlock.appendChild(op);
+      });
+      nextBtn.disabled = true;
+      scoreMsg.textContent = "";
+    }
+    // Option Selection logic
+    function chooseOption(opBtn, optIdx) {
+      if(optionLocked) return;
+      optionLocked = true;
+      const q = questions[idx];
+      document.querySelectorAll('.kbc-option').forEach((btn,j)=>{
+        btn.classList.add("locked");
+        if(j===q.a) btn.classList.add("correct");
+        if(j!==q.a && btn===opBtn) btn.classList.add("incorrect");
+      });
+      if(optIdx === q.a) {
+        score++;
+        scoreMsg.innerHTML = `<span style='color:#36e45e;'>Correct!</span>`;
+      } else {
+        scoreMsg.innerHTML = `<span style='color:#e44c36;'>Incorrect! Correct: ${String.fromCharCode(65+q.a)}</span>`;
+      }
+      nextBtn.disabled = false;
+    }
+    // Next/Finish logic
+    nextBtn.onclick = ()=>{
+      idx++;
+      if(idx<questions.length) render();
+      else finishQuiz();
+    };
+    // Hint logic
+    hintBtn.onclick = ()=>{
+      if(usedHint) return;
+      hintMsg.textContent = "Hint: "+questions[idx].hint;
+      usedHint = true;
+      hintBtn.disabled = true;
+    }
+    // End message
+    function finishQuiz() {
+      qBlock.textContent = '🎉 Quiz Complete!';
+      optsBlock.innerHTML = '';
+      nextBtn.disabled = true;
+      hintBtn.disabled = true;
+      renderLadder();
+      scoreMsg.innerHTML = `You won <b>${ladder[Math.max(0,score-1)] || "₹ 0"}</b> with ${score} out of ${questions.length} correct answers!`;
+    }
+    // Init
+    render();
+  </script>
+</body>
+</html>

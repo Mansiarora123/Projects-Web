@@ -1,0 +1,124 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  /* font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  /* font-family: 'Merriweather', 'Georgia', serif; */
+  font-family: 'Baloo 2', cursive;
+  background-color: azure;
+
+}
+#navList{
+  list-style: none;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  /* margin-left:15px;
+  margin-right: 15px; */
+  align-items: center;
+  width: 100%;
+  
+}
+nav{
+  width: 100%;
+  padding: 1rem;
+}
+.container{
+  height: 100vh ;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: #70a3d6;
+ background-image: linear-gradient(98deg, #74b3f3 0%, #7d7bc2 100%)
+}
+.navContainer{
+  width: 100vw;
+  /* background-color: rgba(118, 118, 214, 0.656); */
+  
+background: linear-gradient(45deg, rgba(65, 89, 208, 0.94) 0.000%, rgba(200, 79, 192, 0.868) 50.000%, rgba(255, 205, 112, 0.775) 100.000%);
+/* background: linear-gradient(90deg, rgba(7, 174, 234, 1.000) 0.000%, rgba(43, 245, 152, 1.000) 100.000%); */
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+#navLogo{
+  font-size: 2.8rem;
+  color: azure;
+}
+a{
+  color: azure;
+  text-decoration: none;  /* remove underline */
+}
+#navItems{
+  display: flex;
+  gap: 45px;
+}
+.footerBox{
+  background: linear-gradient(45deg, rgba(65, 89, 208, 0.94) 0.000%, rgba(200, 79, 192, 0.868) 50.000%, rgba(255, 205, 112, 0.775) 100.000%);
+  width: 100%;
+  text-align: center;
+  min-height: 40px;
+}
+.footerBox p{
+  color: white;
+  font-size: 2.0rem;
+}
+
+.contentBox{
+  width: 98%;
+  height: 87.5vh;
+  margin: auto;
+  /* border: 1px solid black; */
+  background-color: #ffffff92;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  padding: 2.5rem;
+  box-shadow: 0px 0px 30px black 
+}
+
+.item{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+.rightBox{
+  width: 14%;
+  height: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 1px 1px 50px black;
+  border-radius: 20px;
+
+}
+.rightBox img{
+  height: 70%;
+  border-radius: 20px;
+  transition: all 0.6s linear 0s;
+  display: block;
+  /* removes the inline text baseline behavior, which eliminates the default gap under images. */
+  
+}
+.rightBox img:hover{
+  transform: scale(1.1);
+}
+.leftBox{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.leftBox h2{
+  font-size: 2rem;
+}
+.ingBox{
+  font-size: 1.2rem;
+}
+.recipeBox{
+  font-size: 1.1rem;
+}
